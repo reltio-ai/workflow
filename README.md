@@ -16,7 +16,7 @@ You can add dependencies for  in your pom.xml file:
 <dependency>
     <groupId>com.reltio.workflow</groupId>
     <artifactId>workflow-api</artifactId>
-    <version>[2022.2.0.2,]</version>
+    <version>[2025.2.0.0,]</version>
     <scope>provided</scope>
 </dependency>
 
@@ -24,7 +24,7 @@ You can add dependencies for  in your pom.xml file:
 <dependency>
     <groupId>com.reltio.workflow</groupId>
     <artifactId>workflow-custom</artifactId>
-    <version>[2022.2.0.2,]</version>
+    <version>[2025.2.0.0,]</version>
     <scope>provided</scope>
 </dependency>
 ```
