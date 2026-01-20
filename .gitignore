@@ -1,0 +1,124 @@
+# OS Specific
+*~
+*.sw[a-p]
+Thumbs.db
+._*
+.DS_Store
+Desktop.ini
+
+# Archives
+# It's better to unpack these files and commit the raw source because git has its own built in compression methods.
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.tar.gz
+*.zip
+*.bzip
+
+# SVN
+/.svn/*
+*/.svn/*
+
+# Maven/Ant/SBT etc.
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Eclipse
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# NetBeans
+nbproject/
+nbactions.xml
+nb-configuration.xml
+
+
+# Miscellaneous
+*.class
+*.log
+db/
+*.exe
+
+# include all files in varia
+!varia/*/*.*
+
+# ============================================
+# Security-sensitive files - DO NOT COMMIT
+# Added by security automation
+# ============================================
+# Environment files
+.env
+.env.*
+*.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+# Terraform
+*.tfplan
+tfplan
+*.tfstate
+terraform.tfstate
+terraform.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+id_rsa
+id_rsa.*
+id_dsa
+id_dsa.*
+id_ed25519
+id_ed25519.*
+*.ppk
+# Credentials and secrets
+credentials.json
+secrets.json
+service-account*.json
+*-credentials.json
+*-secrets.json
+.htpasswd
+.netrc
+# Cloud provider configs
+.aws/
+.gcp/
+.azure/
+gcloud/
+kubeconfig
+*.kubeconfig

@@ -1,0 +1,29 @@
+# Do not change these values! Changing these values will be considered a violation of the concept of technical debt management framework.
+codecov:
+  strict_yaml_branch: "develop"
+coverage:
+  status:
+    project:
+      default:
+        threshold: 0.5
+ignore:
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/ChangeRequestAction.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/ChangeRequestApply.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/ChangeRequestReject.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/DCRHasChangesListener.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/DCRTypeTaskListener.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/Delete.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/EntityTypeTaskListener.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/Merge.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/NotAMatch.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/RelationTypeTaskListener.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/TaskAssignmentEventListener.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/TaskStartEventListener.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/TypeTaskListener.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/validators/DataChangeRequestValidator.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/validators/PotentialMatchTaskValidator.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/activiti/service/validators/SingleEntityTaskValidator.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/custom/beans/ChangeBean.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/custom/beans/ChangeRequest.java"
+  - "src/workflow-custom/src/main/java/com/reltio/workflow/custom/beans/TypeBean.java"
+  - "src/workflow-custom/src/test/java/com/reltio/workflow/activiti/service/validators/DataChangeRequestValidatorTest.java"

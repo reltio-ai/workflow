@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="dataChangeRequestReview" name="Data Change Request Review" isExecutable="true">
+    <startEvent id="startevent1" name="Start">
+      <extensionElements>
+        <activiti:executionListener class="com.reltio.workflow.activiti.service.DCRHasChangesListener" event="start" />
+      </extensionElements>
+    </startEvent>
+    <userTask id="dcrReview" name="DCR Review" activiti:dueDate="P2D" activiti:candidateGroups="ROLE_REVIEWER">
+      <extensionElements>
+        <activiti:formProperty id="decision" name="Decision" type="enum" default="Approve" required="true">
+          <activiti:value id="Approve" name="Approve"></activiti:value>
+          <activiti:value id="Reject" name="Reject"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="accessTypes" name="AccessTypes" type="string" default="ACCEPT_CHANGE_REQUEST" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="validator" name="Validator" type="string" default="com.reltio.workflow.core.task.validator.DataChangeRequestValidator" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="notificationOnAssignmentEnabled" name="NotificationOnAssignmentEnabled" type="boolean" default="false" writable="false"></activiti:formProperty>
+        <activiti:formProperty id="notificationOnCompletionEnabled" name="NotificationOnCompletionEnabled" type="boolean" default="false" writable="false"></activiti:formProperty>
+        <activiti:taskListener event="create" class="com.reltio.workflow.activiti.service.TaskStartEventListener"></activiti:taskListener>
+        <activiti:taskListener event="create" class="com.reltio.workflow.activiti.service.DCRTypeTaskListener"></activiti:taskListener>
+        <activiti:taskListener event="assignment" class="com.reltio.workflow.activiti.service.TaskAssignmentEventListener"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="dcrReview"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow2" sourceRef="dcrReview" targetRef="exclusivegateway1"></sequenceFlow>
+    <serviceTask id="ApproveService" name="Approve Service" activiti:class="com.reltio.workflow.activiti.service.ChangeRequestApply"></serviceTask>
+    <sequenceFlow id="Approve" name="Approve" sourceRef="exclusivegateway1" targetRef="ApproveService">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision=='Approve'}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="RejectService" name="Reject Service" activiti:class="com.reltio.workflow.activiti.service.ChangeRequestReject"></serviceTask>
+    <sequenceFlow id="Reject" name="Reject" sourceRef="exclusivegateway1" targetRef="RejectService">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${decision=='Reject'}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow5" sourceRef="ApproveService" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="RejectService" targetRef="endevent1"></sequenceFlow>
+    <dataObject id="manualStart" name="manualStart" itemSubjectRef="xsd:boolean">
+      <extensionElements>
+        <activiti:value>false</activiti:value>
+      </extensionElements>
+    </dataObject>
+    <dataObject id="deleted" name="deleted" itemSubjectRef="xsd:boolean">
+      <extensionElements>
+        <activiti:value>false</activiti:value>
+      </extensionElements>
+    </dataObject>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_dataChangeRequestReview">
+    <bpmndi:BPMNPlane bpmnElement="dataChangeRequestReview" id="BPMNPlane_dataChangeRequestReview">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="190.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="dcrReview" id="BPMNShape_dcrReview">
+        <omgdc:Bounds height="55.0" width="105.0" x="270.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="420.0" y="168.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ApproveService" id="BPMNShape_ApproveService">
+        <omgdc:Bounds height="55.0" width="105.0" x="530.0" y="160.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="RejectService" id="BPMNShape_RejectService">
+        <omgdc:Bounds height="55.0" width="105.0" x="530.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="686.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="225.0" y="187.0"></omgdi:waypoint>
+        <omgdi:waypoint x="270.0" y="187.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="375.0" y="187.0"></omgdi:waypoint>
+        <omgdi:waypoint x="420.0" y="188.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Approve" id="BPMNEdge_Approve">
+        <omgdi:waypoint x="460.0" y="188.0"></omgdi:waypoint>
+        <omgdi:waypoint x="530.0" y="187.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="42.0" x="470.0" y="188.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Reject" id="BPMNEdge_Reject">
+        <omgdi:waypoint x="440.0" y="208.0"></omgdi:waypoint>
+        <omgdi:waypoint x="440.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="530.0" y="287.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="30.0" x="450.0" y="246.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="635.0" y="187.0"></omgdi:waypoint>
+        <omgdi:waypoint x="686.0" y="187.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="635.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="701.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="703.0" y="205.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
