@@ -2,7 +2,7 @@
     <parent>
         <artifactId>workflow-public</artifactId>
         <groupId>com.reltio.workflow</groupId>
-        <version>2025.2-develop-SNAPSHOT</version>
+        <version>2026.1.10.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

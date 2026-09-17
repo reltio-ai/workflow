@@ -3,7 +3,7 @@
     <groupId>com.reltio.workflow</groupId>
     <artifactId>workflow-public</artifactId>
     <packaging>pom</packaging>
-    <version>2025.2-develop-SNAPSHOT</version>
+    <version>2026.1.10.2-SNAPSHOT</version>
     <modules>
         <module>workflow-api</module>
         <module>workflow-custom</module>
@@ -64,13 +64,13 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.15.2</version>
+                <version>2.22.1</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.32</version>
+                <version>2.0.17</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
